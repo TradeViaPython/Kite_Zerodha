@@ -16,7 +16,7 @@ def get_enctoken(userid, password, twofa):
     session = requests.Session()
     response = session.post('https://kite.zerodha.com/api/login', data={
         "user_id": userid,
-        "password": "Zerodha@1998"
+        "password": password
     })
     response = session.post('https://kite.zerodha.com/api/twofa', data={
         "request_id": response.json()['data']['request_id'],
