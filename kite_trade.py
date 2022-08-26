@@ -71,17 +71,18 @@ class KiteApp:
         # self.root_url = "https://kite.zerodha.com/oms"
         self.session.get(self.root_url, headers=self.headers)
 
-    def instruments(self):
+    def instruments(self, exchange=None):
         data = self.session.get(f"{self.root_url}/instruments",headers=self.headers).text.split("\n")
         Exchange = []
         for i in data[1:-1]:
             row = i.split(",")
-            Exchange.append({'instrument_token': int(row[0]), 'exchange_token': row[1], 'tradingsymbol': row[2],
-                             'name': row[3][1:-1], 'last_price': float(row[4]),
-                             'expiry': dateutil.parser.parse(row[5]).date() if row[5] != "" else None,
-                             'strike': float(row[6]), 'tick_size': float(row[7]), 'lot_size': int(row[8]),
-                             'instrument_type': row[9], 'segment': row[10],
-             'exchange': row[11]})
+            if exchange is None or exchange == row[11]:
+                Exchange.append({'instrument_token': int(row[0]), 'exchange_token': row[1], 'tradingsymbol': row[2],
+                                 'name': row[3][1:-1], 'last_price': float(row[4]),
+                                 'expiry': dateutil.parser.parse(row[5]).date() if row[5] != "" else None,
+                                 'strike': float(row[6]), 'tick_size': float(row[7]), 'lot_size': int(row[8]),
+                                 'instrument_type': row[9], 'segment': row[10],
+                                 'exchange': row[11]})
         return Exchange
 
     def quote(self, instruments):
@@ -152,7 +153,3 @@ class KiteApp:
                                        data={"parent_order_id": parent_order_id} if parent_order_id else {},
                                        headers=self.headers).json()["data"]["order_id"]
         return order_id
-
-
-
-
