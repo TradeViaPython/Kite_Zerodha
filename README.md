@@ -49,6 +49,8 @@ print(kite.positions())
 
 # Get instrument or exchange
 print(kite.instruments())
+print(kite.instruments("NSE"))
+print(kite.instruments("NFO"))
 
 # Get Live Data
 print(kite.ltp("NSE:RELIANCE"))
