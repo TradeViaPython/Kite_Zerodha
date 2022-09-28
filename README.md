@@ -62,6 +62,7 @@ print(kite.instruments("NFO"))
 print(kite.ltp("NSE:RELIANCE"))
 print(kite.ltp(["NSE:NIFTY 50", "NSE:NIFTY BANK"]))
 print(kite.quote(["NSE:NIFTY BANK", "NSE:ACC", "NFO:NIFTY22SEPFUT"]))
+print(kite.ohlc(["NFO:NIFTY22SEPFUT"])
 
 # Get Historical Data
 import datetime
