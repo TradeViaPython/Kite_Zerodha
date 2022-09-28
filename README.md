@@ -45,6 +45,8 @@ Log In Method
 enctoken = ""
 kite = KiteApp(enctoken=enctoken)
 ```
+to get enctoken you may follow the instructons in this video
+(https://youtube.com/clip/Ugkxlbx_T5ry6TJ0R6U48ata4FI33Thtc4Bc)
 
 Other Methods
 ```python
