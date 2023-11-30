@@ -92,6 +92,11 @@ class KiteApp:
     def ltp(self, instruments):
         data = self.session.get(f"{self.root_url}/quote/ltp", params={"i": instruments}, headers=self.headers).json()["data"]
         return data
+    
+    def ohlc(self,instruments):
+         data = self.session.get(f"{self.root_url}/quote/ohlc", params={"i": instruments}, headers=self.headers).json()["data"]
+         return data
+        
 
     def historical_data(self, instrument_token, from_date, to_date, interval, continuous=False, oi=False):
         params = {"from": from_date,

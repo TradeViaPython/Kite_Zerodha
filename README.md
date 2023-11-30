@@ -45,6 +45,8 @@ Log In Method
 enctoken = ""
 kite = KiteApp(enctoken=enctoken)
 ```
+to get enctoken you may follow the instructons in this video
+(https://youtube.com/clip/Ugkxlbx_T5ry6TJ0R6U48ata4FI33Thtc4Bc)
 
 Other Methods
 ```python
@@ -62,6 +64,7 @@ print(kite.instruments("NFO"))
 print(kite.ltp("NSE:RELIANCE"))
 print(kite.ltp(["NSE:NIFTY 50", "NSE:NIFTY BANK"]))
 print(kite.quote(["NSE:NIFTY BANK", "NSE:ACC", "NFO:NIFTY22SEPFUT"]))
+print(kite.ohlc(["NFO:NIFTY22SEPFUT"]))
 
 # Get Historical Data
 import datetime
