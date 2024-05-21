@@ -49,6 +49,7 @@ kite = KiteApp(enctoken=enctoken)
 Other Methods
 ```python
 # Basic calls
+print(kite.profile())
 print(kite.margins())
 print(kite.orders())
 print(kite.positions())
@@ -58,10 +59,6 @@ print(kite.instruments())
 print(kite.instruments("NSE"))
 print(kite.instruments("NFO"))
 
-# Get Live Data
-print(kite.ltp("NSE:RELIANCE"))
-print(kite.ltp(["NSE:NIFTY 50", "NSE:NIFTY BANK"]))
-print(kite.quote(["NSE:NIFTY BANK", "NSE:ACC", "NFO:NIFTY22SEPFUT"]))
 
 # Get Historical Data
 import datetime
