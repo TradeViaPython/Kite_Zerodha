@@ -61,6 +61,7 @@ print(kite.instruments("NFO"))
 
 
 # Get Tick Data 'Use Websocket'
+from kiteconnect import KiteTicker
 user_id = kite.profile()["user_id"]
 kws = KiteTicker(api_key="TradeViaPython", access_token=enctoken+"&user_id="+user_id)
 
