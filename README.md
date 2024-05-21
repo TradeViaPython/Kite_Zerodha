@@ -60,6 +60,24 @@ print(kite.instruments("NSE"))
 print(kite.instruments("NFO"))
 
 
+# Get Tick Data 'Use Websocket'
+user_id = kite.profile()["user_id"]
+kws = KiteTicker(api_key="TradeViaPython", access_token=enctoken+"&user_id="+user_id)
+
+def on_ticks(ws, ticks):
+    print(ticks)
+
+kws.on_ticks = on_ticks
+kws.connect(threaded=True)
+while not kws.is_connected():
+    time.sleep(1)
+print("WebSocket : Connected")
+kws.subscribe([256265, 260105, 738561, 5633])
+kws.set_mode(kws.MODE_QUOTE, [256265, 260105, 738561, 5633])
+time.sleep(30)
+kws.unsubscribe([256265, 260105, 738561, 5633])
+
+
 # Get Historical Data
 import datetime
 instrument_token = 9604354
