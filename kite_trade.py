@@ -8,6 +8,7 @@ try:
 except ImportError:
     os.system('python -m pip install python-dateutil')
 
+
 import requests
 import dateutil.parser
 
@@ -65,14 +66,14 @@ class KiteApp:
     EXCHANGE_MCX = "MCX"
 
     def __init__(self, enctoken):
-        self.headers = {"Authorization": f"enctoken {enctoken}"}
+        self.enctoken = enctoken
+        self.headers = {"Authorization": f"enctoken {self.enctoken}"}
         self.session = requests.session()
-        self.root_url = "https://api.kite.trade"
-        # self.root_url = "https://kite.zerodha.com/oms"
+        self.root_url = "https://kite.zerodha.com/oms"
         self.session.get(self.root_url, headers=self.headers)
 
     def instruments(self, exchange=None):
-        data = self.session.get(f"{self.root_url}/instruments",headers=self.headers).text.split("\n")
+        data = self.session.get(f"https://api.kite.trade/instruments").text.split("\n")
         Exchange = []
         for i in data[1:-1]:
             row = i.split(",")
@@ -84,14 +85,6 @@ class KiteApp:
                                  'instrument_type': row[9], 'segment': row[10],
                                  'exchange': row[11]})
         return Exchange
-
-    def quote(self, instruments):
-        data = self.session.get(f"{self.root_url}/quote", params={"i": instruments}, headers=self.headers).json()["data"]
-        return data
-
-    def ltp(self, instruments):
-        data = self.session.get(f"{self.root_url}/quote/ltp", params={"i": instruments}, headers=self.headers).json()["data"]
-        return data
 
     def historical_data(self, instrument_token, from_date, to_date, interval, continuous=False, oi=False):
         params = {"from": from_date,
@@ -114,6 +107,10 @@ class KiteApp:
     def margins(self):
         margins = self.session.get(f"{self.root_url}/user/margins", headers=self.headers).json()["data"]
         return margins
+
+    def profile(self):
+        profile = self.session.get(f"{self.root_url}/user/profile", headers=self.headers).json()["data"]
+        return profile
 
     def orders(self):
         orders = self.session.get(f"{self.root_url}/orders", headers=self.headers).json()["data"]
